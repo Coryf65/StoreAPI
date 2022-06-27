@@ -12,6 +12,7 @@ Tech
 - C#
 - REST
 - MVC style
+- Entity Framework (ORM)
 
 ## Design notes
 ___
@@ -21,6 +22,10 @@ Routing using attributes
 | Atrribute | Description |
 | --- | --- |
 | [Route("/products")] | URL to call the API |
+Atrribute	Description
+[Route("/products")]	URL to call the API
+[Route("/products/{id}")]	Controller action parameter is taken from the URL
+[R
 | [Route("/products/{id}")] | Controller action parameter is taken from the URL |
 | [Route("/products/{id?}")] | Optional controller action used from URL |
 | [Route("/[controller]")] | Use controller name in URL |
