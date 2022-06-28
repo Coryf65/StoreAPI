@@ -14,6 +14,12 @@ Tech
 - MVC style
 - Entity Framework (ORM)
 
+Testing your API
+
+- Postman [get it here](https://www.postman.com/downloads/)
+- Bowser Dev Tools (ie: Firefox, Edge, Chrome)
+- Fiddler, a proxy [get it here](https://www.telerik.com/fiddler)
+
 ## Design notes
 ___
 
@@ -35,20 +41,20 @@ Atrribute	Description
 ## Extra Notes
 ___
 
-- REST
-	- Is a design concept
-	- Is built on top of HTTP
-	- Using URIs to access a resource
-	- Uses HTTP verbs for operations
+REST ?
+- Is a design concept
+- Is built on top of HTTP
+- Using URIs to access a resource
+- Uses HTTP verbs for operations
 	
 REST Constraints
 
-	1. Uniform interface
-	2. Client-server (independant from one another)
-	3. Stateless
-	4. Cacheable
-	5. Layered system
-	6. Code on demand
+1. Uniform interface
+2. Client-server (independant from one another)
+3. Stateless
+4. Cacheable
+5. Layered system
+6. Code on demand
 
 | HTTP Verb | Function |
 | --- | --- |
@@ -57,8 +63,8 @@ REST Constraints
 | PUT | Update existing data |
 | DELETE | Delete existing data |
 
-Testing your API
+Model Bindings
 
-- Postman [get it here](https://www.postman.com/downloads/)
-- Bowser Dev Tools (ie: Firefox, Edge, Chrome)
-- Fiddler, a proxy [get it here](https://www.telerik.com/fiddler)
+- [FromBody], Data from the body of the HTTP request, mostly POST / PUT
+- [FromRoute], Data from the route template
+- [FromQuery], Data from the URL
