@@ -30,6 +30,12 @@ namespace StoreAPI_MVC.Controllers
         public ActionResult GetProduct(int id)
         {
             var product = _shopContext.Products.Find(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
             return Ok(product);
         }
 
