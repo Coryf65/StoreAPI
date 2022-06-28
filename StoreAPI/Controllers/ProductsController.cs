@@ -54,6 +54,12 @@ namespace StoreAPI_MVC.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
+            // Add some custom error handling
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             _shopContext.Products.Add(product);
 
             await _shopContext.SaveChangesAsync();
