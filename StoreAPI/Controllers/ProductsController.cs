@@ -17,10 +17,17 @@ namespace StoreAPI_MVC.Controllers
         }
 
         // Action Methods
+        //[HttpGet]
+        //public IEnumerable<Product> GetAllProducts()
+        //{
+        //    return _shopContext.Products.ToList();
+        //}
+
         [HttpGet]
-        public IEnumerable<Product> GetAllProducts()
+        public ActionResult<IEnumerable<Product>> GetAllProducts()
         {
-            return _shopContext.Products.ToList();
+            var products = _shopContext.Products.ToList();
+            return Ok(products);
         }
 
     }
