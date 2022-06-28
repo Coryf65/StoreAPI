@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using StoreAPI_MVC.Models;
 
@@ -17,19 +17,31 @@ namespace StoreAPI_MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetAllProducts()
+        public ActionResult GetAllProducts()
         {
-            var products = _shopContext.Products.ToList();
+            var products = _shopContext.Products.ToArray();
             return Ok(products);
         }
+
+        /// <summary>
+        /// Async Get all Products to an Array
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult> GetAllProductsAsync()
+        {
+            var products = await _shopContext.Products.ToArrayAsync();
+            return Ok(products);
+        }
+
 
         // Could also set the route in the HttpGet Attribute
         // [HttpGet("{id}")]
         [HttpGet]
         [Route("/products/{id}")]
-        public ActionResult GetProduct(int id)
+        public async Task<ActionResult> GetProductAsync(int id)
         {
-            var product = _shopContext.Products.Find(id);
+            var product = await _shopContext.Products.FindAsync(id);
 
             if (product is null)
             {
