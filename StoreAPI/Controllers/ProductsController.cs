@@ -70,5 +70,50 @@ namespace StoreAPI_MVC.Controllers
                 product);
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult> PutProduct(int id, Product product)
+        {
+            if (id != product.Id)
+            {
+                return BadRequest();
+            }
+
+            _shopContext.Entry(product).State = EntityState.Modified;
+
+            try
+            {
+                await _shopContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // the product was updated by another api call
+                // check if the product exists
+                if (!_shopContext.Products.Any(p => p.Id == id))
+                {
+                    return NotFound();
+                } else
+                {
+                    throw; // 500 error
+                }
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Product>> DeleteProduct(int id)
+        {
+            var product = await _shopContext.Products.FindAsync(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            _shopContext.Products.Remove(product);
+            await _shopContext.SaveChangesAsync();
+
+            return product;
+        }
+
     }
 }
