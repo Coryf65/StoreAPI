@@ -16,18 +16,21 @@ namespace StoreAPI_MVC.Controllers
             _shopContext.Database.EnsureCreated(); // make sure to Seed DB
         }
 
-        // Action Methods
-        //[HttpGet]
-        //public IEnumerable<Product> GetAllProducts()
-        //{
-        //    return _shopContext.Products.ToList();
-        //}
-
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetAllProducts()
         {
             var products = _shopContext.Products.ToList();
             return Ok(products);
+        }
+
+        // Could also set the route in the HttpGet Attribute
+        // [HttpGet("{id}")]
+        [HttpGet]
+        [Route("/products/{id}")]
+        public ActionResult GetProduct(int id)
+        {
+            var product = _shopContext.Products.Find(id);
+            return Ok(product);
         }
 
     }
