@@ -115,5 +115,30 @@ namespace StoreAPI_MVC.Controllers
             return product;
         }
 
+        [HttpPost]
+        [Route("Delete")]
+        public async Task<ActionResult<Product>> DeleteMultiple([FromQuery] int[] ids)
+        {
+
+            var products = new List<Product>();
+
+            foreach (var id in ids)
+            {
+                var product = await _shopContext.Products.FindAsync(id);
+
+                if (product is null)
+                {
+                    return NotFound();
+                }
+
+                products.Add(product);
+            }
+
+            _shopContext.Products.RemoveRange(products);
+            await _shopContext.SaveChangesAsync();
+
+            return Ok(products); // convention to return the products deleted
+        }
+
     }
 }
